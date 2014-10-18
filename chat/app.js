@@ -11,6 +11,12 @@ var path = require('path');
 var hello = require('./routes/hello');
 var discussion = require('./routes/discussion');
 
+//1018聊天室範例教學
+var chat = require('./routes/chat');
+
+//解決No 'Access-Control-Allow-Origin' header
+var cors = require('cors')
+
 var app = express();
 
 // all environments
@@ -37,6 +43,11 @@ app.get('/user/:username', user.index);
 
 app.post('/discussion/:message', discussion.create);
 app.get('/discussion/latest/:items', discussion.read);
+
+//1018聊天室範例教學  中間加上解決Cors的東西
+app.get('/start', cors(), chat.start);
+app.post('/send/:message', cors(), chat.send);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
