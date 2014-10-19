@@ -1,6 +1,13 @@
 (function($) {
-    $('#send').on('click', function(event) {
+    $('[data-action=send]'/*'#send'*//*refresh功能我的解法*/).on('click', function(event) {
         event.preventDefault();  //避免按下submit後瀏覽器跳頁動作
+        
+        //$('#send').addClass('hide');  /*refresh功能我的解法*/
+        //$('#refresh').removeClass('hide');  /*refresh功能我的解法*/
+        
+        // toggle views
+        $('[data-action]').addClass('hide');
+        $('[data-action=sending]').removeClass('hide').addClass('disabled');  //串接模式，加上disable表示按鈕不能按
         
         var message = $("#message").val();
         $.ajax({
@@ -10,6 +17,13 @@
             complete: function(jqXHR, textStatus) {
                  $('[data-status]').addClass('hide');
                  $('[data-status=sent]').removeClass('hide'); 
+                
+                 //$('#send').removeClass('hide');   /*refresh功能我的解法*/
+                 //$('#refresh').addClass('hide');   /*refresh功能我的解法*/
+                
+                // reset views
+                $('[data-action]').addClass('hide');
+                $('[data-action=send]').removeClass('hide');
             }
         });
     });
