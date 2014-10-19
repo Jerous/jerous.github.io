@@ -3,6 +3,7 @@
 		dataType: 'json',
 		url: 'http://demand-orient.codio.io:3000/start',
 	    success: function(response, jqXHR, textStatus) {
+            
             // 成功但錯誤的做法，因為裝data的叫model，MODEL不可改
             /*for (i = 0; i < response.data.length; i++){
                 // 自己用的
@@ -17,13 +18,15 @@
             
 	    },
 	    complete: function(jqXHR, textStatus) {
+            
             // 比較好的做法
             // SPA Principle: MVC Architecture
             //  - Modify View instead of Model  
+            
             $('.timestamp').each(function() {   //選出來後像迴圈一樣去找每一個
                 var me = $(this);
                 var timestamp = me.html();
-                alert(timestamp);
+                // alert(timestamp);
                 me.html(moment(timestamp).fromNow());
             });
 	    }

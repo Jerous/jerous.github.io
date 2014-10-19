@@ -1,4 +1,20 @@
 (function($) {
+    $('#send').on('click', function(event) {
+        event.preventDefault();  //避免按下submit後瀏覽器跳頁動作
+        
+        var message = $("#message").val();
+        $.ajax({
+            dataType: 'json',
+            type: 'POST',
+            url: 'http://demand-orient.codio.io:3000/send/' + message,
+            complete: function(jqXHR, textStatus) {
+                 $('[data-status]').addClass('hide');
+                 $('[data-status=sent]').removeClass('hide'); 
+            }
+        });
+    });
+    
+    
 	$.ajax({
 		dataType: 'json',
 		url: 'http://api.openweathermap.org/data/2.5/weather?q=Taipei',
@@ -29,7 +45,10 @@
             $('#weather-icon').addClass('wi-day-cloudy');
 	    },
 	    complete: function(jqXHR, textStatus) {
-            $(document).createWebSocket();
+
+            $('#content').createWebSocket();
+
+            
 	    }
 	});
-}) ($);
+}) ($);  //比較嚴謹的寫法，所以加入$字號。不加也可以 
