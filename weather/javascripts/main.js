@@ -29,6 +29,7 @@
             $('#weather-icon').addClass('wi-day-cloudy');
 	    },
 	    complete: function(jqXHR, textStatus) {
+            $(document).createWebSocket();
 	    }
 	});
 }) ($);

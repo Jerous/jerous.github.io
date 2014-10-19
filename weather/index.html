@@ -14,9 +14,6 @@
     
     <!-- Weather Icons -->
     <link href="bower_components/weather-icons/css/weather-icons.min.css" rel="stylesheet">
-    <script>
-        
-    </script>
 </head>
 
 <body>
@@ -35,6 +32,12 @@
             <p style="font-size: 1.2em;">${message}, <span class="timestamp">${timestamp}</span></p>
         </div>
     </script>
+    
+    <div class="status">
+        <div data-status="success" class="alert alert-info hide">connected</div>
+        <div data-status="error" class="alert alert-danger hide">failed</div>
+        <div data-status="close" class="alert alert-warning hide">closed</div>
+    </div>
 
     <div class="container">
         <div class="row" id="content">
@@ -46,6 +49,7 @@
     <script src="javascripts/jquery.min.js"></script>
     <script src="javascripts/bootstrap.min.js"></script>
 	<script src='javascripts/jquery-tmpl/jquery.tmpl.min.js'></script>
+    <script src="javascripts/websocket.js"></script>
     <script src='bower_components/moment/min/moment.min.js'></script>
 	<script src='javascripts/main.js'></script>
     <script src='javascripts/chat.js'></script>

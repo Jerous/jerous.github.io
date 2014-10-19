@@ -21,7 +21,7 @@ exports.start = function(req, res){
 /*
  * POST chat message.
  */
-
+/*  舊版的寫法
 exports.send = function(req, res){
     var msg = req.params.message;
     var milliseconds = new Date().getTime();
@@ -33,4 +33,25 @@ exports.send = function(req, res){
     history.push(obj);
     
     res.send("Receive message " + msg);
+};*/
+
+
+exports.send = function(req, res){
+    var clients = req.app.clients;
+    var msg = req.params.message;
+    var obj = {};
+    var milliseconds = new Date().getTime();
+    
+    obj.message = msg;
+    obj.timestamp = milliseconds;
+    
+    history.push(obj);
+    
+    res.send("Receive message: " + msg);
+    
+    // Push to all clients via WebSocket
+    clients.forEach(function(client) {
+        // Stringify
+        client.sendUTF(JSON.stringify(history));
+    });
 };
